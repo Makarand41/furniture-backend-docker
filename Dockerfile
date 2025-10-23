@@ -1,14 +1,13 @@
-# Step 1: Use lightweight Java 17 base image
-FROM openjdk:17-jdk-slim
-
-# Step 2: Set working directory inside container
+# Step 1: Use Maven image to build the app
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Step 3: Copy your built JAR into the container
-COPY target/*.jar app.jar
-
-# Step 4: Expose the default Spring Boot port
-EXPOSE 8080
-
-# Step 5: Command to run the JAR
+# Step 2: Use lightweight JDK to run the app
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=builder /app/target/*.jar app.jar
+EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "app.jar"]

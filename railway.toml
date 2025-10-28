@@ -1,0 +1,5 @@
+[build]
+dockerfile = "Dockerfile"
+
+[env]
+SERVER_PORT = "8081"

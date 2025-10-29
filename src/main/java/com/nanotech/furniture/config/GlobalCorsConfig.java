@@ -1,3 +1,34 @@
+//package com.nanotech.furniture.config;
+//
+//import org.springframework.context.annotation.Bean;
+//import org.springframework.context.annotation.Configuration;
+//import org.springframework.web.cors.CorsConfiguration;
+//import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+//import org.springframework.web.filter.CorsFilter;
+//
+//import java.util.List;
+//
+//@Configuration
+//public class GlobalCorsConfig {
+//
+//    @Bean
+//    public CorsFilter corsFilter() {
+//        CorsConfiguration config = new CorsConfiguration();
+//        config.setAllowedOriginPatterns(List.of(
+//            "https://furniture-frontend-teck.vercel.app",
+//            "http://localhost:5173"
+//        ));
+//        config.setAllowedMethods(List.of("*"));
+//        config.setAllowedHeaders(List.of("*"));
+//        config.setExposedHeaders(List.of("*"));
+//        config.setAllowCredentials(true);
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", config);
+//        return new CorsFilter(source);
+//    }
+//}
+
 package com.nanotech.furniture.config;
 
 import org.springframework.context.annotation.Bean;
@@ -18,9 +49,9 @@ public class GlobalCorsConfig {
             "https://furniture-frontend-teck.vercel.app",
             "http://localhost:5173"
         ));
-        config.setAllowedMethods(List.of("*"));
-        config.setAllowedHeaders(List.of("*"));
-        config.setExposedHeaders(List.of("*"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("Content-Type", "Authorization", "Accept", "Origin"));
+        config.setExposedHeaders(List.of("Content-Type"));
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -28,3 +59,4 @@ public class GlobalCorsConfig {
         return new CorsFilter(source);
     }
 }
+
